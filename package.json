@@ -18,6 +18,7 @@
   "homepage": "https://github.com/novasera/my_app#readme",
   "dependencies": {
     "ejs": "^2.4.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "mongoose": "^4.4.20"
   }
 }

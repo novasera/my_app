@@ -1,6 +1,19 @@
 var express = require('express');
 var path = require('path');
 var app = express();
+var mongoose = require('mongoose');
+
+// connect Mongo DB
+mongoose.connect("mongodb://dev:devdev@ds011024.mlab.com:11024/novasera");
+var db = mongoose.connection;
+
+db.once("open", function() {
+  console.log("DB Connected");
+});
+
+db.on("error", function(e) {
+  console.log("DB ERROR : ", e);
+});
 
 app.set("view engine", 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
