@@ -4,7 +4,7 @@ var app = express();
 var mongoose = require('mongoose');
 
 // connect Mongo DB
-
+mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
 
 db.once("open", function() {
