@@ -29,7 +29,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(flash());
-app.use(session({secret:'MySecret'}));
+app.use(session({
+  secret:'MySecret',
+  resave: true,
+  saveUninitialized: true
+}));
 
 // passport
 var passport = require('./config/passport');
@@ -42,7 +46,6 @@ app.use('/users', require('./routes/users'));
 app.use('/posts', require('./routes/posts'));
 
 // start server
-var port = process.env.PORT || 3000; // for heroku
-app.listen(port, function() {
+app.listen(3000, function() {
   console.log('Server On!');
 });
