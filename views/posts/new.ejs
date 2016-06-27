@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <% include ../partials/head %>
+  </head>
+  <body>
+    <header>
+      <% include ../partials/header %>
+    </header>
+    <div class="posts">
+      <% include partials/top %>
+      <!-- main start -->
+
+      <!-- views/posts/new.ejs -->
+      <div class="new">
+        <h3>New Post</h3>
+        <form class="posts_form" method="post" action="/posts">
+          <label>Title</label>
+          <input type="text" name="post[title]" value="" />
+          <label>Body</label>
+          <textarea name="post[body]"></textarea>
+          <div class="float_right">Author: <%= user.nickname %></div>
+          <button type="submit">Submit</button>
+        </form>
+        <a href="/posts"><button>Back</button></a>
+      </div>
+
+      <!-- main end -->
+    </div>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
