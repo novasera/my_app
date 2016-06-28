@@ -8,16 +8,20 @@ var userSchema = mongoose.Schema({
   createdAt : {type:Date, default:Date.now}
 });
 
-userSchema.pre("save", function(next) {
-  var user = this;
+userSchema.pre("save", hashPassword);
 
-  if (!user.isModified("password"))
+userSchema.pre("findOneAndUpdate", function hashPassword(next) {
+
+  var user = this._update;
+
+  if(!user.newPassword)
   {
+    delete user.password;
     return next();
   }
   else
   {
-    user.password = bcrypt.hashSync(user.password);
+    user.password = bcrypt.hashSync(user.newPassword);
     return next();
   }
 });
@@ -34,3 +38,19 @@ userSchema.methods.hash = function(password) {
 var User = mongoose.model('user', userSchema);
 
 module.exports = User;
+
+// functions
+function hashPassword(next)
+{
+  var user = this;
+
+  if(!user.isModified("password"))
+  {
+    return next();
+  }
+  else
+  {
+    user.password = bcrypt.hashSync(user.password);
+    return next();
+  }
+}

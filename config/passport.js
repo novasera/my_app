@@ -34,6 +34,8 @@ passport.use('local-login',
           return done(null, false, req.flash('loginError', 'Password does not match.'));
         }
 
+        req.flash('postsMessage', 'Welcome' + user.nickname + '!');
+
         return done(null, user);
       });
     }
